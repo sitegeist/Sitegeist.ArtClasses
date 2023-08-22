@@ -20,7 +20,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Sitegeist\\ArtClasses\\Tests\\": "Tests"
+      "Sitegeist\\ArtClasses\\Tests\\": "Tests/"
     }
   },
   "scripts": {

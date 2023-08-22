@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Sitegeist\ArtClasses\Domain;
+namespace Sitegeist\ArtClasses\Domain\Interpretation;
 
 use Neos\Flow\Annotations as Flow;
 
