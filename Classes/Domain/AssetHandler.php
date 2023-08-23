@@ -29,11 +29,15 @@ class AssetHandler
     public function whenAssetWasCreated(Asset $asset): void
     {
         if ($asset instanceof Image) {
-            $imageInterpretation = $this->imageInterpretationTranslator->translateImageInterpretation(
-                $this->imageInterpreter->interpretImage($asset),
-                null,
-                new Locale('de')
-            );
+            $targetLocale = new Locale('de');
+            $imageInterpretation = $this->imageInterpreter->interpretImage($asset, $targetLocale);
+            if ($imageInterpretation->locale !== $targetLocale) {
+                $imageInterpretation = $this->imageInterpretationTranslator->translateImageInterpretation(
+                    $imageInterpretation,
+                    $imageInterpretation->locale,
+                    $targetLocale
+                );
+            }
             if ($imageInterpretation->description) {
                 $asset->setCaption($imageInterpretation->description);
                 $this->imageRepository->update($asset);
