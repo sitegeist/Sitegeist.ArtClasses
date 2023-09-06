@@ -36,7 +36,19 @@ class Package extends BasePackage
             AssetService::class,
             'assetCreated',
             AssetHandler::class,
-            'whenAssetWasCreated'
+            'whenAssetWasCreatedOrAssetResourceWasReplaced'
+        );
+        $signalSlotDispatcher->connect(
+            AssetService::class,
+            'assetRemoved',
+            AssetHandler::class,
+            'whenAssetWasRemoved'
+        );
+        $signalSlotDispatcher->connect(
+            AssetService::class,
+            'assetResourceReplaced',
+            AssetHandler::class,
+            'whenAssetWasCreatedOrAssetResourceWasReplaced'
         );
     }
 }

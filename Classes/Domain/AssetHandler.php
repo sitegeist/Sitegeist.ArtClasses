@@ -28,7 +28,7 @@ class AssetHandler
     ) {
     }
 
-    public function whenAssetWasCreated(Asset $asset): void
+    public function whenAssetWasCreatedOrAssetResourceWasReplaced(Asset $asset): void
     {
         if ($asset instanceof Image) {
             $targetLocale = new Locale('de');
@@ -50,5 +50,10 @@ class AssetHandler
                 $this->imageRepository->update($asset);
             }
         }
+    }
+
+    public function whenAssetWasRemoved(Asset $asset): void
+    {
+        $this->artClasses->removeInterpretation($asset->getIdentifier());
     }
 }
