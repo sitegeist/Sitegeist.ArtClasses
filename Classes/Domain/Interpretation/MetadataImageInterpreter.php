@@ -21,7 +21,13 @@ final class MetadataImageInterpreter implements ImageInterpreterInterface
     public function interpretImage(Image $image, ?Locale $targetLocale): ImageInterpretation
     {
         return new ImageInterpretation(
-            $image->getLabel()
+            null,
+            $image->getLabel(),
+            [],
+            [],
+            [],
+            [],
+            []
         );
     }
 }
