@@ -13,6 +13,7 @@ use Neos\Flow\I18n\Locale;
 use Neos\Media\Domain\Model\Asset;
 use Neos\Media\Domain\Model\Image;
 use Neos\Media\Domain\Repository\ImageRepository;
+use Sitegeist\ArtClasses\Domain\Interpretation\ArtClasses;
 use Sitegeist\ArtClasses\Domain\Interpretation\ImageInterpreterInterface;
 use Sitegeist\ArtClasses\Domain\Translation\ImageInterpretationTranslatorInterface;
 
@@ -22,7 +23,8 @@ class AssetHandler
     public function __construct(
         private readonly ImageInterpreterInterface $imageInterpreter,
         private readonly ImageInterpretationTranslatorInterface $imageInterpretationTranslator,
-        private readonly ImageRepository $imageRepository
+        private readonly ImageRepository $imageRepository,
+        private readonly ArtClasses $artClasses
     ) {
     }
 
@@ -37,6 +39,11 @@ class AssetHandler
                     $imageInterpretation->locale,
                     $targetLocale
                 );
+            }
+            if ($this->artClasses->hasInterpretation($asset->getIdentifier())) {
+                $this->artClasses->replaceInterpretation($asset->getIdentifier(), $imageInterpretation);
+            } else {
+                $this->artClasses->addInterpretation($asset->getIdentifier(), $imageInterpretation);
             }
             if ($imageInterpretation->description) {
                 $asset->setCaption($imageInterpretation->description);
