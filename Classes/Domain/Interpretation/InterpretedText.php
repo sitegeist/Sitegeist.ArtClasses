@@ -28,7 +28,7 @@ final class InterpretedText implements \JsonSerializable
     {
         return [
             'text' => $this->text,
-            'locale' => $this->locale->getLanguage(),
+            'locale' => $this->locale?->getLanguage(),
             'boundingPolygon' => $this->boundingPolygon
         ];
     }

@@ -46,7 +46,7 @@ final class ImageInterpretation implements \JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'locale' => $this->locale->getLanguage(),
+            'locale' => $this->locale?->getLanguage(),
             'description' => $this->description,
             'labels' => $this->labels,
             'objects' => $this->objects,
