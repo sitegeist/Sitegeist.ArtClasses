@@ -1,0 +1,82 @@
+prototype(Sitegeist.ArtClasses:Module.InterpretationManagement.Show) < prototype(Neos.Fusion:Component) {
+    renderer = afx`
+        <div class="neos-row-fluid">
+            <legend>{labels.interpretation}: {asset.label}</legend>
+        </div>
+        <div class="neos-row-fluid neos-module-container">
+            <fieldset class="neos-span6">
+                <legend>{labels.interpretation}</legend>
+                <div class="neos-control-group">
+                    <label class="neos-control-label" for="description">{labels.description}</label>
+                    <div class="neos-controls neos-controls-row">
+                        <textarea
+                            id="description"
+                            readonly
+                            disabled
+                            rows="5"
+                            style="width: 400px"
+                        >{interpretation.description}</textarea>
+                    </div>
+                </div>
+                <div class="neos-control-group">
+                    <label class="neos-control-label" for="labels">{labels.labels}</label>
+                    <div class="neos-controls neos-controls-row" id="objects">
+                        <ul id="labels">
+                            <Neos.Fusion:Loop items={interpretation.labels}>
+                                <li>{item}</li>
+                            </Neos.Fusion:Loop>
+                        </ul>
+                    </div>
+                </div>
+                <div class="neos-control-group">
+                    <label class="neos-control-label" for="objects">{labels.objects}</label>
+                    <div class="neos-controls neos-controls-row" id="objects">
+                        <ul>
+                            <Neos.Fusion:Loop items={interpretation.objects}>
+                                <li>{item.name}</li>
+                            </Neos.Fusion:Loop>
+                        </ul>
+                    </div>
+                </div>
+                <div class="neos-control-group">
+                    <label class="neos-control-label" for="texts">{labels.texts}</label>
+                    <div class="neos-controls neos-controls-row" id="texts">
+                        <ul>
+                            <Neos.Fusion:Loop items={interpretation.texts}>
+                                <li>{item.text}</li>
+                            </Neos.Fusion:Loop>
+                        </ul>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="neos-span6 neos-offset-1">
+                <legend>{labels.assetPreview}</legend>
+                <div class="neos-control-group">
+                    <Neos.Neos:ImageTag asset={asset} maximumHeight="400px" />
+                </div>
+                <div class="neos-control-group">
+                    <label class="neos-control-label" for="cropHints">{labels.cropHints}</label>
+                    <div class="neos-controls neos-controls-row" id="cropHints">
+                        <ul>
+                            <Neos.Fusion:Loop items={interpretation.cropHints}>
+                                <li>
+                                    <Neos.Fusion:Loop items={item.vertices}>
+                                        {item.x}/{item.y}<Neos.Fusion:Value @if={!iterator.isLast} value=",&nbsp;" />
+                                    </Neos.Fusion:Loop>
+                                </li>
+                            </Neos.Fusion:Loop>
+                        </ul>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="neos-footer">
+            <a class="neos-button neos-button-primary"
+               title={labels.backToIndex}
+               href={indexUri}
+            >
+                {labels.backToIndex}
+            </a>
+        </div>
+    `
+}

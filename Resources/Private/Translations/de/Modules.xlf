@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="Modules" product-name="Sitegeist.ArtClasses" source-language="en" datatype="plaintext" target-language="de">
+    <body>
+      <trans-unit id="interpretationManagement.label" xml:space="preserve" approved="yes">
+        <source>Asset Interpretations</source>
+        <target state="final">Asset-Interpretationen</target>
+      </trans-unit>
+      <trans-unit id="interpretationManagement.description" xml:space="preserve" approved="yes">
+        <source>Gives an overview over asset interpretations</source>
+        <target state="final">Gibt einen Überblick über Asset-Interpretationen</target>
+      </trans-unit>
+      <trans-unit id="labels.interpretation" xml:space="preserve" approved="yes">
+        <source>Interpretation</source>
+        <target state="final">Interpretation</target>
+      </trans-unit>
+      <trans-unit id="labels.assetLabel" xml:space="preserve" approved="yes">
+        <source>Asset Label</source>
+        <target state="final">Asset-Label</target>
+      </trans-unit>
+      <trans-unit id="labels.assetPreview" xml:space="preserve" approved="yes">
+        <source>Preview</source>
+        <target state="final">Vorschau</target>
+      </trans-unit>
+      <trans-unit id="labels.actions" xml:space="preserve" approved="yes">
+        <source>Actions</source>
+        <target state="final">Aktionen</target>
+      </trans-unit>
+      <trans-unit id="labels.show" xml:space="preserve" approved="yes">
+        <source>Show</source>
+        <target state="final">Anzeigen</target>
+      </trans-unit>
+      <trans-unit id="labels.description" xml:space="preserve" approved="yes">
+        <source>Description</source>
+        <target state="final">Beschreibung</target>
+      </trans-unit>
+      <trans-unit id="labels.labels" xml:space="preserve" approved="yes">
+        <source>Labels</source>
+        <target state="final">Labels</target>
+      </trans-unit>
+      <trans-unit id="labels.objects" xml:space="preserve" approved="yes">
+        <source>Objects</source>
+        <target state="final">Objekte</target>
+      </trans-unit>
+      <trans-unit id="labels.texts" xml:space="preserve" approved="yes">
+        <source>Texts</source>
+        <target state="final">Texte</target>
+      </trans-unit>
+      <trans-unit id="labels.cropHints" xml:space="preserve" approved="yes">
+        <source>Crop Hints</source>
+        <target state="final">Crop Hints</target>
+      </trans-unit>
+      <trans-unit id="labels.backToIndex" xml:space="preserve" approved="yes">
+        <source>Back to Index</source>
+        <target state="final">Zurück zur Übersicht</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

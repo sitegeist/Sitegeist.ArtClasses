@@ -1,0 +1,10 @@
+Neos:
+  Neos:
+    modules:
+      'administration':
+        submodules:
+          'interpretationManagement':
+            label: 'Sitegeist.ArtClasses:Modules:interpretationManagement.label'
+            controller: 'Sitegeist\ArtClasses\Application\Controller\InterpretationManagementController'
+            description: 'Sitegeist.ArtClasses:Modules:interpretationManagement.description'
+            icon: 'fas fa-sticky-note'

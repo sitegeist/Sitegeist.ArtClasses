@@ -1,0 +1,13 @@
+prototype(Sitegeist.ArtClasses:Module.InterpretationManagement.FlashMessages) < prototype(Neos.Fusion:Component) {
+    flashMessages = ${flashMessages}
+
+    renderer = afx`
+        <ul id="neos-notifications-inline">
+            <Neos.Fusion:Loop items={flashMessages} itemName="flashMessage">
+                <li data-type={String.toLowerCase(flashMessage.severity)}>
+                    {flashMessage.message}
+                </li>
+            </Neos.Fusion:Loop>
+        </ul>
+    `
+}

@@ -22,6 +22,19 @@ final class InterpretedDominantColor implements \JsonSerializable
     }
 
     /**
+     * @param array<string,float> $array
+     */
+    public static function fromArray(array $array): self
+    {
+        return new self(
+            $array['red'],
+            $array['green'],
+            $array['blue'],
+            $array['alpha'],
+        );
+    }
+
+    /**
      * @return array<string,float>
      */
     public function jsonSerialize(): array

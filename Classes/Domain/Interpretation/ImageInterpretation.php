@@ -26,7 +26,8 @@ final class ImageInterpretation implements \JsonSerializable
         /** @var array<int,InterpretedDominantColor */
         public readonly array $dominantColors,
         /** @var array<int,InterpretedBoundingPolygon> */
-        public readonly array $cropHints
+        public readonly array $cropHints,
+        public readonly ?string $assetId = null
     ) {
     }
 

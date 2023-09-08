@@ -74,6 +74,26 @@ final class ArtClasses
         return (int)$dataset['COUNT(*)'] > 0;
     }
 
+    /**
+     * @return array<int,ImageInterpretation>
+     */
+    public function findAllInterpretations(): array
+    {
+        $interpretations = [];
+        foreach (
+            $this->databaseConnection->executeQuery(
+                'SELECT asset_id, interpretation FROM ' . self::TABLE_NAME
+            )->fetchAllAssociative() as $dataset
+        ) {
+            $interpretations[] = $this->mapDatasetToImageInterpretation(
+                $dataset['asset_id'],
+                \json_decode($dataset['interpretation'], true, 512, JSON_THROW_ON_ERROR)
+            );
+        }
+
+        return $interpretations;
+    }
+
     public function findInterpretation(string $assetId): ?ImageInterpretation
     {
         $dataset = $this->databaseConnection->executeQuery(
@@ -85,6 +105,7 @@ final class ArtClasses
 
         return $dataset
             ? $this->mapDatasetToImageInterpretation(
+                $assetId,
                 \json_decode($dataset['interpretation'], true, 512, JSON_THROW_ON_ERROR)
             )
             : null;
@@ -101,16 +122,38 @@ final class ArtClasses
     /**
      * @param array<string,mixed> $dataset
      */
-    private function mapDatasetToImageInterpretation(array $dataset): ImageInterpretation
+    private function mapDatasetToImageInterpretation(string $assetId, array $dataset): ImageInterpretation
     {
         return new ImageInterpretation(
             $dataset['locale'] ? new Locale($dataset['locale']) : null,
             $dataset['description'],
-            [],
-            [],
-            [],
-            [],
-            [],
+            $dataset['labels'],
+            array_map(
+                fn (array $objectData): InterpretedObject => new InterpretedObject(
+                    $objectData['name'],
+                    InterpretedBoundingPolygon::fromArray($objectData['boundingPolygon'])
+                ),
+                $dataset['objects']
+            ),
+            array_map(
+                fn (array $textData): InterpretedText => new InterpretedText(
+                    $textData['text'],
+                    $textData['locale'] ? new Locale($textData['locale']) : null,
+                    InterpretedBoundingPolygon::fromArray($textData['boundingPolygon'])
+                ),
+                $dataset['texts']
+            ),
+            array_map(
+                fn (array $dominantColorData): InterpretedDominantColor
+                    => InterpretedDominantColor::fromArray($dominantColorData),
+                $dataset['dominantColors']
+            ),
+            array_map(
+                fn (array $cropHintData): InterpretedBoundingPolygon
+                    => InterpretedBoundingPolygon::fromArray($cropHintData),
+                $dataset['cropHints']
+            ),
+            $assetId
         );
     }
 }

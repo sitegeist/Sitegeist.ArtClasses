@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="Modules" product-name="Sitegeist.ArtClasses" source-language="en" datatype="plaintext">
+    <body>
+      <trans-unit id="interpretationManagement.label" xml:space="preserve" approved="yes">
+        <source>Asset Interpretations</source>
+      </trans-unit>
+      <trans-unit id="interpretationManagement.description" xml:space="preserve" approved="yes">
+        <source>Gives an overview over asset interpretations</source>
+      </trans-unit>
+      <trans-unit id="labels.interpretation" xml:space="preserve" approved="yes">
+        <source>Interpretation</source>
+      </trans-unit>
+      <trans-unit id="labels.assetLabel" xml:space="preserve" approved="yes">
+        <source>Asset Label</source>
+      </trans-unit>
+      <trans-unit id="labels.assetPreview" xml:space="preserve" approved="yes">
+        <source>Preview</source>
+      </trans-unit>
+      <trans-unit id="labels.actions" xml:space="preserve" approved="yes">
+        <source>Actions</source>
+      </trans-unit>
+      <trans-unit id="labels.show" xml:space="preserve" approved="yes">
+        <source>Show</source>
+      </trans-unit>
+      <trans-unit id="labels.description" xml:space="preserve" approved="yes">
+        <source>Description</source>
+      </trans-unit>
+      <trans-unit id="labels.labels" xml:space="preserve" approved="yes">
+        <source>Labels</source>
+      </trans-unit>
+      <trans-unit id="labels.objects" xml:space="preserve" approved="yes">
+        <source>Objects</source>
+      </trans-unit>
+      <trans-unit id="labels.texts" xml:space="preserve" approved="yes">
+        <source>Texts</source>
+      </trans-unit>
+      <trans-unit id="labels.cropHints" xml:space="preserve" approved="yes">
+        <source>Crop Hints</source>
+      </trans-unit>
+      <trans-unit id="labels.backToIndex" xml:space="preserve" approved="yes">
+        <source>Back to Index</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

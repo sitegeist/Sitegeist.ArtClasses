@@ -26,6 +26,17 @@ final class InterpretedNormalizedVertex implements \JsonSerializable
     }
 
     /**
+     * @param array<string,float> $array
+     */
+    public static function fromArray(array $array): self
+    {
+        return new self(
+            $array['x'],
+            $array['y']
+        );
+    }
+
+    /**
      * @return array<string,float>
      */
     public function jsonSerialize(): array

@@ -1,0 +1,13 @@
+# Security policy for the Sitegeist.ArtClasses package
+
+privilegeTargets:
+  'Neos\Neos\Security\Authorization\Privilege\ModulePrivilege':
+    'Sitegeist.ArtClasses:InterpretationManagement':
+      matcher: 'administration/interpretationManagement'
+
+roles:
+  'Neos.Neos:Administrator':
+    privileges:
+      -
+        privilegeTarget: 'Sitegeist.ArtClasses:InterpretationManagement'
+        permission: GRANT

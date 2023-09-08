@@ -22,6 +22,25 @@ final class InterpretedBoundingPolygon implements \JsonSerializable
     }
 
     /**
+     * @param array<string,mixed> $array
+     */
+    public static function fromArray(array $array): self
+    {
+        return new self(
+            array_map(
+                fn (array $vertexData): InterpretedVertex
+                    => InterpretedVertex::fromArray($vertexData),
+                $array['vertices']
+            ),
+            array_map(
+                fn (array $vertexData): InterpretedNormalizedVertex
+                    => InterpretedNormalizedVertex::fromArray($vertexData),
+                $array['normalizedVertices']
+            ),
+        );
+    }
+
+    /**
      * @return array<string,mixed>
      */
     public function jsonSerialize(): array

@@ -20,6 +20,17 @@ final class InterpretedVertex implements \JsonSerializable
     }
 
     /**
+     * @param array<string,int> $array
+     */
+    public static function fromArray(array $array): self
+    {
+        return new self(
+            $array['x'],
+            $array['y']
+        );
+    }
+
+    /**
      * @return array<string,int>
      */
     public function jsonSerialize(): array

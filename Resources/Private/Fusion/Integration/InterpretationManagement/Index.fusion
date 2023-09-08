@@ -1,0 +1,35 @@
+prototype(Sitegeist.ArtClasses:Module.InterpretationManagement.Index) < prototype(Neos.Fusion:Component) {
+    renderer = afx`
+        <Sitegeist.ArtClasses:Module.InterpretationManagement.FlashMessages />
+        <div class="neos-row-fluid">
+            <legend>{labels.interpretation}</legend>
+            <table class="neos-table">
+                <thead>
+                <tr>
+                    <th>{labels.assetLabel}</th>
+                    <th>{labels.assetPreview}</th>
+                    <th class="neos-pull-right">{labels.actions}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <Neos.Fusion:Loop items={interpretations} itemName="interpretationData">
+                    <tr>
+                        <td>{interpretationData.asset.label}</td>
+                        <td><Neos.Neos:ImageTag asset={interpretationData.asset} maximumHeight="150px" /></td>
+                        <td class="neos-action">
+                            <div class="neos-pull-right">
+                                <a data-neos-toggle="tooltip"
+                                    class="neos-button neos-button-primary"
+                                    title={labels.show}
+                                    href={interpretationData.showUri}
+                                >
+                                    <i class="fas fa-eye icon-white"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </Neos.Fusion:Loop>
+                </tbody>
+            </table>
+        </div>`
+}
