@@ -116,7 +116,15 @@ final class ArtClasses
      */
     public function findAssetIds(string $searchTerm): array
     {
-        return [];
+        return array_map(
+            fn (array $record): string => $record['asset_id'],
+            $this->databaseConnection->executeQuery(
+                'SELECT asset_id FROM ' . self::TABLE_NAME . ' WHERE interpretation LIKE :searchTerm',
+                [
+                    'searchTerm' => '%' . $searchTerm . '%'
+                ]
+            )->fetchAllAssociative()
+        );
     }
 
     /**
