@@ -26,4 +26,13 @@ final class NoopImageInterpretationTranslator implements ImageInterpretationTran
     {
         return $imageInterpretation;
     }
+
+    /**
+     * @param array<string,string> $tags
+     * @return array<string,string>
+     */
+    public function translateTags(array $tags, ?Locale $sourceLocale, Locale $targetLocale): array
+    {
+        return $tags;
+    }
 }

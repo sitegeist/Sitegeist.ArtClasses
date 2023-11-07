@@ -24,4 +24,19 @@ interface ImageInterpretationTranslatorInterface
         ?Locale $sourceLocale,
         Locale $targetLocale
     ): ImageInterpretation;
+
+    /**
+     * Translates a given set of tags to the target locale.
+     * If no source locale is given, the translator will try to automatically detect it.
+     *
+     * The returned array must be indexed with the same tag IDs that are given in the input array.
+     *
+     * @param array<string,string> $tags
+     * @return array<string,string>
+     */
+    public function translateTags(
+        array $tags,
+        ?Locale $sourceLocale,
+        Locale $targetLocale
+    ): array;
 }
