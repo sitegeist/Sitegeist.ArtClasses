@@ -37,23 +37,31 @@ class InterpretationManagementController extends AbstractModuleController
 
     public function indexAction(): void
     {
+        $interpretations = array_filter(array_map(
+            function (ImageInterpretation $imageInterpretation): ?array {
+                if (!$imageInterpretation->assetId) {
+                    return null;
+                }
+                $asset = $this->assetRepository->findByIdentifier($imageInterpretation->assetId);
+                if (!$asset instanceof Asset) {
+                    return null;
+                }
+
+                return [
+                    'asset' => $asset,
+                    'showUri' => $this->getActionUri('show', ['assetId' => $imageInterpretation->assetId])
+                ];
+            },
+            $this->artClasses->findAllInterpretations()
+        ));
+        usort($interpretations, fn($a, $b) =>
+        strcmp(
+            strtolower($a['asset']->getLabel()),
+            strtolower($b['asset']->getLabel())
+        )
+        );
         $this->view->assignMultiple([
-            'interpretations' => array_filter(array_map(
-                function (ImageInterpretation $imageInterpretation): ?array {
-                    if (!$imageInterpretation->assetId) {
-                        return null;
-                    }
-                    $asset = $this->assetRepository->findByIdentifier($imageInterpretation->assetId);
-                    if (!$asset instanceof Asset) {
-                        return null;
-                    }
-                    return [
-                        'asset' => $asset,
-                        'showUri' => $this->getActionUri('show', ['assetId' => $imageInterpretation->assetId])
-                    ];
-                },
-                $this->artClasses->findAllInterpretations()
-            )),
+            'interpretations' => $interpretations,
             'labels' => [
                 'interpretation' => $this->getLabel('labels.interpretation'),
                 'assetLabel' => $this->getLabel('labels.assetLabel'),
