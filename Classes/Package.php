@@ -14,9 +14,16 @@ use Neos\Flow\Core\Bootstrap;
 use Neos\Flow\Package\Package as BasePackage;
 use Neos\Media\Domain\Service\AssetService;
 use Sitegeist\ArtClasses\Domain\AssetHandler;
+use Neos\Flow\Annotations as Flow;
 
 class Package extends BasePackage
 {
+    /**
+     * @Flow\InjectConfiguration(path="enableImageTagging")
+     * @var string
+     */
+    protected $enableImageTagging;
+
     public function boot(Bootstrap $bootstrap): void
     {
         $dispatcher = $bootstrap->getSignalSlotDispatcher();
@@ -32,23 +39,25 @@ class Package extends BasePackage
     {
         $signalSlotDispatcher = $bootstrap->getSignalSlotDispatcher();
 
-        $signalSlotDispatcher->connect(
-            AssetService::class,
-            'assetCreated',
-            AssetHandler::class,
-            'whenAssetWasCreatedOrAssetResourceWasReplaced'
-        );
-        $signalSlotDispatcher->connect(
-            AssetService::class,
-            'assetRemoved',
-            AssetHandler::class,
-            'whenAssetWasRemoved'
-        );
-        $signalSlotDispatcher->connect(
-            AssetService::class,
-            'assetResourceReplaced',
-            AssetHandler::class,
-            'whenAssetWasCreatedOrAssetResourceWasReplaced'
-        );
+        if ($this->enableImageTagging) {
+            $signalSlotDispatcher->connect(
+                AssetService::class,
+                'assetCreated',
+                AssetHandler::class,
+                'whenAssetWasCreatedOrAssetResourceWasReplaced'
+            );
+            $signalSlotDispatcher->connect(
+                AssetService::class,
+                'assetRemoved',
+                AssetHandler::class,
+                'whenAssetWasRemoved'
+            );
+            $signalSlotDispatcher->connect(
+                AssetService::class,
+                'assetResourceReplaced',
+                AssetHandler::class,
+                'whenAssetWasCreatedOrAssetResourceWasReplaced'
+            );
+        }
     }
 }
