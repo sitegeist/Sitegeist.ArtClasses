@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Sitegeist\ArtClasses;
 
+use Neos\Flow\Configuration\ConfigurationManager;
 use Neos\Flow\Core\Booting\Sequence;
 use Neos\Flow\Core\Booting\Step;
 use Neos\Flow\Core\Bootstrap;
@@ -32,23 +33,27 @@ class Package extends BasePackage
     {
         $signalSlotDispatcher = $bootstrap->getSignalSlotDispatcher();
 
-        $signalSlotDispatcher->connect(
-            AssetService::class,
-            'assetCreated',
-            AssetHandler::class,
-            'whenAssetWasCreatedOrAssetResourceWasReplaced'
-        );
-        $signalSlotDispatcher->connect(
-            AssetService::class,
-            'assetRemoved',
-            AssetHandler::class,
-            'whenAssetWasRemoved'
-        );
-        $signalSlotDispatcher->connect(
-            AssetService::class,
-            'assetResourceReplaced',
-            AssetHandler::class,
-            'whenAssetWasCreatedOrAssetResourceWasReplaced'
-        );
+        $configurationManager = $bootstrap->getObjectManager()->get(ConfigurationManager::class);
+        $settings = $configurationManager->getConfiguration(ConfigurationManager::CONFIGURATION_TYPE_SETTINGS, $this->getPackageKey());
+        if (isset($settings['enableImageInterpretation']) && $settings['enableImageInterpretation'] === true) {
+            $signalSlotDispatcher->connect(
+                AssetService::class,
+                'assetCreated',
+                AssetHandler::class,
+                'whenAssetWasCreatedOrAssetResourceWasReplaced'
+            );
+            $signalSlotDispatcher->connect(
+                AssetService::class,
+                'assetRemoved',
+                AssetHandler::class,
+                'whenAssetWasRemoved'
+            );
+            $signalSlotDispatcher->connect(
+                AssetService::class,
+                'assetResourceReplaced',
+                AssetHandler::class,
+                'whenAssetWasCreatedOrAssetResourceWasReplaced'
+            );
+        }
     }
 }
